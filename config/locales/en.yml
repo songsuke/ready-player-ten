@@ -30,4 +30,10 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  shared:
+    menu:
+      posts: Upload images
+      plays: Plays
+  posts:
+    new:
+      upload_images: Upload Images
