@@ -37,3 +37,6 @@ en:
   posts:
     new:
       upload_images: Upload Images
+  plays:
+    index:
+      save: Save

@@ -1,0 +1,5 @@
+var playLists = document.getElementById('play-lists');
+var node = document.createElement("tr");
+notice.innerText = "<%= flash[:notice] %>";
+playLists.appendChild(node);
+node.innerHTML = "<%= escape_javascript(render @record) %>";
