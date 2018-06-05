@@ -7,7 +7,11 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     if @post.save
+      flash[:notice] = 'Images have been uploaded successfully'
       redirect_to root_path
+    else
+      flash[:alert] = 'Cannot upload the images'
+      render :new
     end
   end
 
