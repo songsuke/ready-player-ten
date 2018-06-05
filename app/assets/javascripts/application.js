@@ -12,5 +12,6 @@
 //
 //= require rails-ujs
 //= require activestorage
+//= require player_ten/app-time-ticker
+//= require player_ten/app
 //= require turbolinks
-//= require_tree .
