@@ -5,15 +5,14 @@
   <div class="display-image">
     <%= image_tag '', id: 'displayImage' %>
   </div>
-  <%= form_with(url: plays_path) do |form| %>
-    <div class="form-group">
-      <% @blobs.each do |blob| %>
-        <div class="image-data"
-             data-image-url="<%= url_for(blob) %>"
-             data-blob-id="<%= blob.id %>">
-        </div>
-      <% end %>
+  <% @blobs.each do |blob| %>
+    <div class="image-data"
+         data-image-url="<%= url_for(blob) %>"
+         data-blob-id="<%= blob.id %>">
     </div>
+  <% end %>
+  <div id="image-amount" data-amount="<%=@blobs.count%>"></div>
+  <%= form_with(url: plays_path) do |form| %>
     <%= hidden_field(:play, :blob) %>
     <%= hidden_field(:play, :timer) %>
     <div class="form-group">
