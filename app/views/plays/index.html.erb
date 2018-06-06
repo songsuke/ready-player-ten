@@ -1,24 +1,23 @@
 <div id="notice"></div>
 
-<div class="text-sm-center">
-  <h1 id="countDown">10</h1>
-  <div class="display-image">
-    <%= image_tag '', id: 'displayImage' %>
-  </div>
-  <% @blobs.each do |blob| %>
-    <div class="image-data"
-         data-image-url="<%= url_for(blob) %>"
-         data-blob-id="<%= blob.id %>">
-    </div>
-  <% end %>
-  <div id="image-amount" data-amount="<%=@blobs.count%>"></div>
-  <%= form_with(url: plays_path) do |form| %>
-    <%= hidden_field(:play, :blob) %>
-    <%= hidden_field(:play, :timer) %>
-    <div class="form-group">
-      <%= form.submit t('.save'), class: 'btn btn-primary' %>
-    </div>
-  <% end %>
+<div id="plays-content">
+  <div class="text-sm-center">
+    <h1 id="countDown">10</h1>
+    <% @blobs.each do |blob| %>
+      <div class="display-image" style="display: none" data-blob-id="<%=blob.id%>">
+        <%= image_tag url_for(blob) %>
+      </div>
 
-  <%= render partial: 'lists', locals: { plays: @plays } %>
+  <% end %>
+    <div id="image-amount" data-amount="<%=@blobs.count%>"></div>
+    <%= form_with(url: plays_path) do |form| %>
+      <%= hidden_field(:play, :blob) %>
+      <%= hidden_field(:play, :timer) %>
+      <div class="form-group">
+        <%= form.submit t('.save'), class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+
+    <%= render partial: 'lists', locals: { plays: @plays } %>
+  </div>
 </div>

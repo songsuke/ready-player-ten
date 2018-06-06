@@ -24,7 +24,14 @@
     _displayImage: function() {
       var amountOfImages = this.elemImages.length;
       this.position = (this.position === amountOfImages - 1) ? 0 : this.position + 1;
-      this.elemDisplayImage.src = this.elemImages[this.position].dataset.imageUrl;
+      this.elemImages[this.position].setAttribute('style', 'display:block');
+
+      if (this.position === 0 && this.elemImages.length !== 1) {
+        this.elemImages[amountOfImages - 1].setAttribute('style', 'display:none');
+      } else if (this.elemImages.length !== 1) {
+        this.elemImages[this.position - 1].setAttribute('style', 'display:none');
+      }
+
       var blobId = this.elemImages[this.position].dataset.blobId;
       this._updateBlobField(blobId);
     },
@@ -36,23 +43,19 @@
       document.getElementById('play_blob').value = blobId;
     },
     _verifyLoadedImages: function() {
-      var i ;
-      for (i=0; i<=this.elemImages.length-1; i++) {
-        if (this.elemImages[i].dataset.imageUrl === undefined) {
-          return false
-        }
-      }
-      return true;
+      var amount = parseInt(document.getElementById('image-amount').dataset.amount);
+      return (amount === this.elemImages.length)
     },
     init: function () {
       var self = this;
       this.position = -1;
-      this.elemImages = document.getElementsByClassName('image-data');
-      this.elemDisplayImage = document.getElementById("displayImage");
+      this.elemImages = document.getElementsByClassName('display-image');
+      var playContent = document.getElementById("plays-content");
 
-      if (!this.elemDisplayImage) return
+      if (!playContent) return
 
       var ensureImagesAreLoaded = function() {
+
         if (self._verifyLoadedImages()) {
           self._setupCountdownTimer(11);
         } else {
